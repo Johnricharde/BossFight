@@ -14,7 +14,7 @@ namespace BossFightTest
             Assert.Equal(60, character.CurrentStamina);
         }
         [Fact]
-        public static void CheckIfRandomIsWithinRanger()
+        public void CheckIfRandomIsWithinRanger()
         {
             int randomNumber = Program.RandomNumber(0, 31);
 
@@ -52,6 +52,18 @@ namespace BossFightTest
 
             character.Recharge(character);
             Assert.Equal(15, character.CurrentStamina);
+        }
+        [Fact]
+        public void CanDetectDeath()
+        {
+            var character = new GameCharacter("character", 0, 15, 15);
+            var enemy = new GameCharacter("enemy", 0, 15, 15);
+
+            bool characteIsDead = character.isDead(character, enemy);
+            bool enemyisDead = enemy.isDead(enemy, character);
+
+            Assert.True(characteIsDead);
+            Assert.True(enemyisDead);
         }
     }
 }
